@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mom Lunch – Ghar Jaisa Dinner, Roz.</title>
+  <meta name="description" content="Homemade dinner tiffin service. Fresh, healthy, ghar jaisa khana delivered daily. Order on WhatsApp!" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #FFFBF4;
+      color: #3D2C1E;
+      padding-bottom: 80px; /* space for sticky bar */
+    }
+
+    /* ─── COLOUR TOKENS ─── */
+    :root {
+      --orange:   #FF6B2B;
+      --orange-lt:#FF8C55;
+      --yellow:   #FFC531;
+      --cream:    #FFFBF4;
+      --sand:     #FFF0D6;
+      --brown:    #3D2C1E;
+      --brown-lt: #7A5C44;
+      --green:    #25D366;
+      --white:    #FFFFFF;
+      --shadow:   0 4px 20px rgba(61,44,30,.10);
+      --radius:   18px;
+    }
+
+    /* ─── UTILITIES ─── */
+    .container { width: 100%; max-width: 520px; margin: 0 auto; padding: 0 18px; }
+    .section    { padding: 56px 0 48px; }
+    .section-alt{ background: var(--sand); }
+    .tag {
+      display: inline-block; background: var(--yellow); color: var(--brown);
+      font-size: .72rem; font-weight: 800; letter-spacing: .06em;
+      padding: 4px 12px; border-radius: 20px; text-transform: uppercase; margin-bottom: 10px;
+    }
+    h2.section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem; font-weight: 800;
+      line-height: 1.25; color: var(--brown);
+      margin-bottom: 8px;
+    }
+    p.section-sub { font-size: .95rem; color: var(--brown-lt); line-height: 1.6; margin-bottom: 28px; }
+
+    /* ─── BUTTONS ─── */
+    .btn-wa {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--green); color: #fff;
+      font-family: 'Nunito', sans-serif; font-size: 1.05rem; font-weight: 800;
+      padding: 15px 28px; border-radius: 50px;
+      text-decoration: none; border: none; cursor: pointer;
+      box-shadow: 0 6px 22px rgba(37,211,102,.35);
+      transition: transform .18s, box-shadow .18s;
+      width: 100%;
+    }
+    .btn-wa:hover  { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,211,102,.45); }
+    .btn-wa:active { transform: translateY(0); }
+    .btn-wa svg   { width: 22px; height: 22px; flex-shrink: 0; }
+
+    .btn-primary {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--orange); color: #fff;
+      font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800;
+      padding: 14px 28px; border-radius: 50px;
+      text-decoration: none; border: none; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255,107,43,.30);
+      transition: transform .18s, box-shadow .18s;
+      width: 100%;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(255,107,43,.40); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--cream); border-bottom: 1px solid rgba(255,197,49,.4);
+      padding: 12px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 800;
+      color: var(--orange); text-decoration: none;
+    }
+    .nav-logo span { font-size: 1.4rem; }
+    .nav-cta {
+      background: var(--green); color: #fff;
+      font-size: .8rem; font-weight: 800;
+      padding: 8px 16px; border-radius: 40px;
+      text-decoration: none; border: none; cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      box-shadow: 0 4px 14px rgba(37,211,102,.3);
+      transition: transform .15s;
+    }
+    .nav-cta:hover { transform: scale(1.03); }
+    .nav-cta svg { width: 16px; height: 16px; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: linear-gradient(148deg, #FFF6E5 0%, #FFECD1 60%, #FFD9A8 100%);
+      padding: 48px 0 52px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF6B2B' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-emoji { font-size: 3.5rem; margin-bottom: 12px; display: block; animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.3rem; font-weight: 800;
+      color: var(--brown); line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .hero h1 span { color: var(--orange); }
+    .hero p {
+      font-size: 1rem; color: var(--brown-lt);
+      line-height: 1.6; margin-bottom: 28px; padding: 0 8px;
+    }
+    .hero-badges {
+      display: flex; justify-content: center; gap: 8px;
+      flex-wrap: wrap; margin-bottom: 28px;
+    }
+    .badge {
+      background: var(--white); color: var(--brown);
+      font-size: .8rem; font-weight: 700;
+      padding: 6px 14px; border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(61,44,30,.08);
+      display: flex; align-items: center; gap: 5px;
+    }
+
+    /* ─── MENU CARDS ─── */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .menu-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .menu-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(61,44,30,.14); }
+    .menu-card:nth-child(1) { grid-column: 1 / -1; } /* first card full width */
+    .menu-card-img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      background: linear-gradient(135deg, #FFE5C8 0%, #FFDBA8 100%);
+      display: block;
+    }
+    .menu-card-img-wrap {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #FFE5C8, #FFDBA8);
+    }
+    .menu-card:nth-child(1) .menu-card-img-wrap { aspect-ratio: 16/7; }
+    .menu-card-img-wrap::after {
+      content: attr(data-emoji);
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .menu-card:nth-child(1) .menu-card-img-wrap::after { font-size: 3.5rem; }
+    .menu-card-img[src] { position: relative; z-index: 1; }
+    .menu-card-body { padding: 12px 14px 14px; }
+    .menu-day { font-size: .72rem; font-weight: 800; color: var(--orange); text-transform: uppercase; letter-spacing: .05em; }
+    .menu-name { font-size: .98rem; font-weight: 800; color: var(--brown); margin-top: 2px; }
+    .menu-price-tag {
+      display: inline-block; background: var(--yellow);
+      font-size: .75rem; font-weight: 800; color: var(--brown);
+      padding: 3px 10px; border-radius: 20px; margin-top: 6px;
+    }
+
+    /* ─── PRICING ─── */
+    .calc-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px 20px 28px;
+      margin-top: 4px;
+    }
+    .calc-label { font-size: .9rem; font-weight: 700; color: var(--brown); margin-bottom: 8px; display: block; }
+    .roti-stepper {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+    }
+    .stepper-btn {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--sand); border: none; cursor: pointer;
+      font-size: 1.3rem; font-weight: 800; color: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s, transform .12s;
+      flex-shrink: 0;
+    }
+    .stepper-btn:hover { background: var(--yellow); transform: scale(1.08); }
+    #roti-count { font-size: 1.5rem; font-weight: 900; color: var(--brown); min-width: 32px; text-align: center; }
+    .check-row {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--sand); border-radius: 12px;
+      padding: 13px 16px; margin-bottom: 14px; cursor: pointer;
+      transition: background .15s;
+    }
+    .check-row:hover { background: #FFE8BC; }
+    .check-row input[type=checkbox] {
+      width: 22px; height: 22px; accent-color: var(--orange); cursor: pointer; flex-shrink: 0;
+    }
+    .check-row label { font-size: .95rem; font-weight: 700; color: var(--brown); cursor: pointer; }
+    .check-row .check-price { margin-left: auto; font-size: .85rem; font-weight: 800; color: var(--brown-lt); }
+
+    .preorder-row {
+      background: linear-gradient(135deg, #FFF5D9, #FFE6A3);
+      border: 2px solid var(--yellow); border-radius: 14px;
+      padding: 14px 16px; margin-bottom: 22px;
+      display: flex; align-items: center; gap: 12px; cursor: pointer;
+    }
+    .preorder-row input[type=checkbox] {
+      width: 22px; height: 22px; accent-color: var(--orange); cursor: pointer; flex-shrink: 0;
+    }
+    .preorder-label { flex: 1; }
+    .preorder-label strong { display: block; font-size: .95rem; font-weight: 800; color: var(--brown); }
+    .preorder-label span  { font-size: .8rem; font-weight: 600; color: var(--brown-lt); }
+    .preorder-discount { font-size: 1rem; font-weight: 900; color: var(--orange); flex-shrink: 0; }
+
+    .price-breakdown {
+      background: var(--sand); border-radius: 14px;
+      padding: 16px 18px; margin-bottom: 20px;
+    }
+    .pb-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; }
+    .pb-label { font-size: .88rem; font-weight: 600; color: var(--brown-lt); }
+    .pb-val   { font-size: .88rem; font-weight: 800; color: var(--brown); }
+    .pb-divider { height: 1px; background: rgba(61,44,30,.1); margin: 8px 0; }
+    .pb-total .pb-label { font-size: 1rem; font-weight: 800; color: var(--brown); }
+    .pb-total .pb-val   { font-size: 1.2rem; font-weight: 900; color: var(--orange); }
+    .pb-discount .pb-val { color: #2E9E4F; }
+    .save-badge {
+      display: none; text-align: center; background: #EDFBF3;
+      border: 1.5px solid #2E9E4F; border-radius: 10px;
+      color: #2E9E4F; font-size: .88rem; font-weight: 800;
+      padding: 9px 14px; margin-bottom: 18px;
+    }
+    .save-badge.show { display: block; }
+
+    /* ─── WHY US ─── */
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px; margin-top: 8px;
+    }
+    .why-card {
+      background: var(--white); border-radius: 16px;
+      box-shadow: var(--shadow); padding: 20px 16px;
+      text-align: center;
+    }
+    .why-icon { font-size: 2.2rem; margin-bottom: 8px; display: block; }
+    .why-title { font-size: .95rem; font-weight: 800; color: var(--brown); margin-bottom: 4px; }
+    .why-desc  { font-size: .8rem; color: var(--brown-lt); line-height: 1.5; }
+
+    /* ─── HOW IT WORKS ─── */
+    .steps { margin-top: 8px; }
+    .step {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(61,44,30,.07);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--orange); color: #fff;
+      font-size: 1.1rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(255,107,43,.3);
+    }
+    .step-content h4 { font-size: .98rem; font-weight: 800; color: var(--brown); margin-bottom: 3px; }
+    .step-content p  { font-size: .85rem; color: var(--brown-lt); line-height: 1.5; }
+
+    /* ─── TESTIMONIALS ─── */
+    .testi-list { margin-top: 8px; display: flex; flex-direction: column; gap: 14px; }
+    .testi-card {
+      background: var(--white); border-radius: 16px;
+      box-shadow: var(--shadow); padding: 20px 18px;
+    }
+    .testi-stars { color: var(--yellow); font-size: 1rem; margin-bottom: 8px; }
+    .testi-text  { font-size: .92rem; color: var(--brown); line-height: 1.6; margin-bottom: 12px; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 10px; }
+    .testi-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--yellow); display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .testi-name { font-size: .88rem; font-weight: 800; color: var(--brown); }
+    .testi-loc  { font-size: .78rem; color: var(--brown-lt); }
+
+    /* ─── FINAL CTA ─── */
+    .final-cta {
+      background: linear-gradient(140deg, #FF6B2B 0%, #FF9240 100%);
+      padding: 52px 18px 56px; text-align: center;
+    }
+    .final-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 800; color: #fff;
+      margin-bottom: 12px; line-height: 1.25;
+    }
+    .final-cta p { font-size: .95rem; color: rgba(255,255,255,.85); margin-bottom: 28px; line-height: 1.6; }
+    .final-cta .btn-wa {
+      background: #fff; color: var(--green);
+      box-shadow: 0 8px 24px rgba(0,0,0,.15);
+    }
+    .final-cta .btn-wa:hover { background: #f0fff4; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--brown); color: rgba(255,255,255,.6);
+      text-align: center; padding: 20px 18px;
+      font-size: .8rem; line-height: 1.7;
+    }
+    footer a { color: var(--yellow); text-decoration: none; font-weight: 700; }
+    footer strong { color: rgba(255,255,255,.9); }
+
+    /* ─── STICKY BOTTOM BAR ─── */
+    .sticky-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      background: var(--white);
+      padding: 10px 18px 14px;
+      box-shadow: 0 -4px 20px rgba(61,44,30,.12);
+      border-top: 1px solid rgba(255,197,49,.3);
+    }
+    .sticky-bar .btn-wa { border-radius: 50px; font-size: 1rem; padding: 14px 20px; }
+
+    /* ─── PULSE ANIMATION for CTA ─── */
+    @keyframes pulse-green {
+      0%,100% { box-shadow: 0 6px 22px rgba(37,211,102,.35); }
+      50%      { box-shadow: 0 8px 30px rgba(37,211,102,.6); }
+    }
+    .btn-wa { animation: pulse-green 2.5s ease-in-out infinite; }
+    .btn-wa:hover { animation: none; }
+
+    /* ─── DESKTOP ADJUSTMENTS ─── */
+    @media (min-width: 600px) {
+      .menu-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .menu-card:nth-child(1) { grid-column: auto; }
+      h2.section-title { font-size: 2rem; }
+      .hero h1 { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ░░░ NAV ░░░ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span>🍱</span> Mom Lunch
+  </a>
+  <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="nav-cta" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.519 5.829L.057 23.09a.75.75 0 00.921.921l5.261-1.462A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.994-1.368l-.358-.212-3.122.868.835-3.049-.232-.376A9.775 9.775 0 012.182 12c0-5.419 4.399-9.818 9.818-9.818 5.419 0 9.818 4.399 9.818 9.818 0 5.42-4.399 9.818-9.818 9.818z"/></svg>
+    Order Now
+  </a>
+</nav>
+
+<!-- ░░░ HERO ░░░ -->
+<section class="hero">
+  <div class="container">
+    <span class="hero-emoji">🍱</span>
+    <h1>Ghar Jaisa Dinner,<br /><span>Roz.</span></h1>
+    <p>Fresh homemade dinner tiffin delivered to your door every evening. Nutritious, delicious, just like mom makes it. 💛</p>
+    <div class="hero-badges">
+      <span class="badge">🌿 100% Homemade</span>
+      <span class="badge">🚚 Daily Delivery</span>
+      <span class="badge">💰 Starts ₹250</span>
+      <span class="badge">❤️ No Preservatives</span>
+    </div>
+    <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.519 5.829L.057 23.09a.75.75 0 00.921.921l5.261-1.462A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.994-1.368l-.358-.212-3.122.868.835-3.049-.232-.376A9.775 9.775 0 012.182 12c0-5.419 4.399-9.818 9.818-9.818 5.419 0 9.818 4.399 9.818 9.818 0 5.42-4.399 9.818-9.818 9.818z"/></svg>
+      Order on WhatsApp – It's Easy!
+    </a>
+  </div>
+</section>
+
+<!-- ░░░ WEEKLY MENU ░░░ -->
+<section class="section" id="menu">
+  <div class="container">
+    <span class="tag">📅 This Week's Menu</span>
+    <h2 class="section-title">7-Day Dinner Rotation</h2>
+    <p class="section-sub">Every day a fresh, home-cooked delight. Rotis made fresh with love. 💕</p>
+
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <div class="menu-card-img-wrap" data-emoji="🍛">
+          <img src="images/day1.jpg" alt="Homemade Chole Roti" class="menu-card-img"
+               onerror="this.style.display='none'" />
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-day">Monday</div>
+          <div class="menu-name">Chole + Roti</div>
+          <span class="menu-price-tag">from ₹250</span>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-img-wrap" data-emoji="🫘">
+          <img src="images/day2.jpg" alt="Homemade Rajma Roti" class="menu-card-img"
+               onerror="this.style.display='none'" />
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-day">Tuesday</div>
+          <div class="menu-name">Rajma + Roti</div>
+          <span class="menu-price-tag">from ₹250</span>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-img-wrap" data-emoji="🥔">
+          <img src="images/day3.jpg" alt="Homemade Aloo Roti" class="menu-card-img"
+               onerror="this.style.display='none'" />
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-day">Wednesday</div>
+          <div class="menu-name">Aloo + Roti</div>
+          <span class="menu-price-tag">from ₹250</span>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-img-wrap" data-emoji="🍲">
+          <img src="images/day4.jpg" alt="Homemade Daal Roti" class="menu-card-img"
+               onerror="this.style.display='none'" />
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-day">Thursday</div>
+          <div class="menu-name">Daal + Roti</div>
+          <span class="menu-price-tag">from ₹250</span>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-img-wrap" data-emoji="🥦">
+          <img src="images/day5.jpg" alt="Homemade Bhindi Roti" class="menu-card-img"
+               onerror="this.style.display='none'" />
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-day">Friday</div>
+          <div class="menu-name">Bhindi + Roti</div>
+          <span class="menu-price-tag">from ₹250</span>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-img-wrap" data-emoji="🥛">
+          <img src="images/day6.jpg" alt="Homemade Kadhi Roti" class="menu-card-img"
+               onerror="this.style.display='none'" />
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-day">Saturday</div>
+          <div class="menu-name">Kadhi + Roti</div>
+          <span class="menu-price-tag">from ₹250</span>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-img-wrap" data-emoji="🥬">
+          <img src="images/day7.jpg" alt="Homemade Gobi Roti" class="menu-card-img"
+               onerror="this.style.display='none'" />
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-day">Sunday</div>
+          <div class="menu-name">Gobi + Roti</div>
+          <span class="menu-price-tag">from ₹250</span>
+        </div>
+      </div>
+
+    </div>
+
+    <br />
+    <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener" style="margin-top:8px;">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.519 5.829L.057 23.09a.75.75 0 00.921.921l5.261-1.462A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.994-1.368l-.358-.212-3.122.868.835-3.049-.232-.376A9.775 9.775 0 012.182 12c0-5.419 4.399-9.818 9.818-9.818 5.419 0 9.818 4.399 9.818 9.818 0 5.42-4.399 9.818-9.818 9.818z"/></svg>
+      Order Today's Tiffin
+    </a>
+  </div>
+</section>
+
+<!-- ░░░ PRICING CALCULATOR ░░░ -->
+<section class="section section-alt" id="pricing">
+  <div class="container">
+    <span class="tag">💰 Pricing</span>
+    <h2 class="section-title">Calculate Your Tiffin Cost</h2>
+    <p class="section-sub">Customise your meal and see the price instantly. No hidden charges!</p>
+
+    <div class="calc-card">
+
+      <!-- Roti count -->
+      <label class="calc-label">🫓 How many rotis per day?</label>
+      <div class="roti-stepper">
+        <button class="stepper-btn" id="roti-minus" aria-label="Decrease rotis">−</button>
+        <span id="roti-count">4</span>
+        <button class="stepper-btn" id="roti-plus" aria-label="Increase rotis">+</button>
+        <span style="font-size:.85rem;color:var(--brown-lt);font-weight:600;">× ₹5 each</span>
+      </div>
+
+      <!-- Rice -->
+      <div class="check-row" onclick="toggleCheck('rice-check')">
+        <input type="checkbox" id="rice-check" />
+        <label for="rice-check">🍚 Add Rice Bowl</label>
+        <span class="check-price">+₹30</span>
+      </div>
+
+      <!-- Pre-order -->
+      <div class="preorder-row" onclick="toggleCheck('preorder-check')">
+        <input type="checkbox" id="preorder-check" />
+        <div class="preorder-label">
+          <strong>🗓️ Pre-order Full Week</strong>
+          <span>Book all 7 days together & save big</span>
+        </div>
+        <span class="preorder-discount">−₹99</span>
+      </div>
+
+      <!-- Breakdown -->
+      <div class="price-breakdown">
+        <div class="pb-row">
+          <span class="pb-label">Base meal</span>
+          <span class="pb-val">₹250</span>
+        </div>
+        <div class="pb-row" id="roti-row">
+          <span class="pb-label" id="roti-label">4 rotis × ₹5</span>
+          <span class="pb-val" id="roti-val">₹20</span>
+        </div>
+        <div class="pb-row" id="rice-row" style="display:none;">
+          <span class="pb-label">Rice bowl</span>
+          <span class="pb-val">₹30</span>
+        </div>
+        <div class="pb-divider"></div>
+        <div class="pb-row">
+          <span class="pb-label">Per day price</span>
+          <span class="pb-val" id="per-day-val">₹270</span>
+        </div>
+        <div class="pb-row">
+          <span class="pb-label">Weekly (×7 days)</span>
+          <span class="pb-val" id="weekly-val">₹1,890</span>
+        </div>
+        <div class="pb-row pb-discount" id="discount-row" style="display:none;">
+          <span class="pb-label">🎉 Pre-order discount</span>
+          <span class="pb-val" id="discount-val" style="color:#2E9E4F;">−₹99</span>
+        </div>
+        <div class="pb-divider"></div>
+        <div class="pb-row pb-total">
+          <span class="pb-label">Total weekly</span>
+          <span class="pb-val" id="final-val">₹1,890</span>
+        </div>
+      </div>
+
+      <div class="save-badge" id="save-badge">🎉 Pre-order & save ₹99 — Smart choice!</div>
+
+      <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.519 5.829L.057 23.09a.75.75 0 00.921.921l5.261-1.462A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.994-1.368l-.358-.212-3.122.868.835-3.049-.232-.376A9.775 9.775 0 012.182 12c0-5.419 4.399-9.818 9.818-9.818 5.419 0 9.818 4.399 9.818 9.818 0 5.42-4.399 9.818-9.818 9.818z"/></svg>
+        Order on WhatsApp Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ WHY CHOOSE US ░░░ -->
+<section class="section" id="why">
+  <div class="container">
+    <span class="tag">⭐ Why Mom Lunch?</span>
+    <h2 class="section-title">Food Made with Heart</h2>
+    <p class="section-sub">Not a restaurant. Not a cloud kitchen. Just a mom who loves to cook. 🤍</p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-icon">🌿</span>
+        <div class="why-title">Fresh Ingredients</div>
+        <div class="why-desc">Sourced fresh daily. No frozen food, ever.</div>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🚫</span>
+        <div class="why-title">No Preservatives</div>
+        <div class="why-desc">100% natural. No chemicals, no shortcuts.</div>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">⏱️</span>
+        <div class="why-title">On-Time Delivery</div>
+        <div class="why-desc">Hot dinner delivered before 8 PM daily.</div>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">💰</span>
+        <div class="why-title">Affordable</div>
+        <div class="why-desc">Better than a restaurant, cheaper too!</div>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🧂</span>
+        <div class="why-title">Customisable</div>
+        <div class="why-desc">Less spice? More rotis? Just let us know.</div>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">❤️</span>
+        <div class="why-title">Made with Love</div>
+        <div class="why-desc">Every tiffin packed like feeding your own family.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ HOW IT WORKS ░░░ -->
+<section class="section section-alt" id="how">
+  <div class="container">
+    <span class="tag">📖 How It Works</span>
+    <h2 class="section-title">3 Simple Steps</h2>
+    <p class="section-sub">Starting your tiffin subscription is as easy as texting a friend!</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>📱 Message Us on WhatsApp</h4>
+          <p>Click any "Order on WhatsApp" button. Tell us your address, meal preferences, and start date.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>✅ Confirm Your Order</h4>
+          <p>We'll confirm your daily tiffin, number of rotis, and any add-ons. Simple, no app needed.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>🍱 Get Hot Tiffin Delivered!</h4>
+          <p>Fresh, hot dinner arrives at your door every evening. Eat, enjoy, repeat! 😋</p>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-primary" target="_blank" rel="noopener">
+      🚀 Start My Tiffin Today
+    </a>
+  </div>
+</section>
+
+<!-- ░░░ TESTIMONIALS ░░░ -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <span class="tag">💬 Happy Customers</span>
+    <h2 class="section-title">What People Are Saying</h2>
+    <p class="section-sub">Real reviews from real tiffin lovers in our area. 🏡</p>
+
+    <div class="testi-list">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Ekdum ghar jaisa khana! The chole were just like my mother used to make. Super fresh and on time every day. Highly recommend to anyone living alone!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">👨</div>
+          <div>
+            <div class="testi-name">Rahul Sharma</div>
+            <div class="testi-loc">Sector 62, Noida</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Best tiffin service I've tried in this area. No maida, no oil dripping, just simple healthy food. My kids love the daal and roti. Will continue for sure!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">👩</div>
+          <div>
+            <div class="testi-name">Priya Mehta</div>
+            <div class="testi-loc">Indirapuram, Ghaziabad</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Ordered the full week pre-order and saved ₹99. The quality is consistent every day. Rajma on Tuesday was absolutely 🔥. WhatsApp ordering is so convenient!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">👨‍💼</div>
+          <div>
+            <div class="testi-name">Ankit Verma</div>
+            <div class="testi-loc">Vaishali, Ghaziabad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ FINAL CTA ░░░ -->
+<section class="final-cta">
+  <div class="container">
+    <h2>Hungry? Let's Fix That. 🍱</h2>
+    <p>Join hundreds of happy customers enjoying fresh homemade dinner every evening. Order in 30 seconds on WhatsApp!</p>
+    <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.519 5.829L.057 23.09a.75.75 0 00.921.921l5.261-1.462A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.994-1.368l-.358-.212-3.122.868.835-3.049-.232-.376A9.775 9.775 0 012.182 12c0-5.419 4.399-9.818 9.818-9.818 5.419 0 9.818 4.399 9.818 9.818 0 5.42-4.399 9.818-9.818 9.818z"/></svg>
+      Order on WhatsApp — Free & Fast!
+    </a>
+  </div>
+</section>
+
+<!-- ░░░ FOOTER ░░░ -->
+<footer>
+  <strong>🍱 Mom Lunch</strong><br />
+  Homemade dinner tiffin, made with love every day.<br />
+  <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" target="_blank" rel="noopener">📞 +91 95888 59966</a>
+  &nbsp;|&nbsp;
+  <a href="#menu">Menu</a>
+  &nbsp;|&nbsp;
+  <a href="#pricing">Pricing</a>
+  <br /><br />
+  <span style="font-size:.75rem;">Made with ❤️ for home food lovers.</span>
+</footer>
+
+<!-- ░░░ STICKY BAR ░░░ -->
+<div class="sticky-bar">
+  <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.519 5.829L.057 23.09a.75.75 0 00.921.921l5.261-1.462A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.994-1.368l-.358-.212-3.122.868.835-3.049-.232-.376A9.775 9.775 0 012.182 12c0-5.419 4.399-9.818 9.818-9.818 5.419 0 9.818 4.399 9.818 9.818 0 5.42-4.399 9.818-9.818 9.818z"/></svg>
+    🍱 Order Dinner on WhatsApp
+  </a>
+</div>
+
+<!-- ░░░ JAVASCRIPT ░░░ -->
+<script>
+  /* ── Calculator Logic ── */
+  let rotis = 4;
+  const MIN_ROTIS = 1, MAX_ROTIS = 15;
+
+  function fmt(n) {
+    return '₹' + n.toLocaleString('en-IN');
+  }
+
+  function updateCalc() {
+    const rice     = document.getElementById('rice-check').checked;
+    const preorder = document.getElementById('preorder-check').checked;
+
+    const perDay  = 250 + (rotis * 5) + (rice ? 30 : 0);
+    const weekly  = perDay * 7;
+    const discount = preorder ? 99 : 0;
+    const final   = weekly - discount;
+
+    // Roti row
+    document.getElementById('roti-label').textContent = rotis + ' roti' + (rotis !== 1 ? 's' : '') + ' × ₹5';
+    document.getElementById('roti-val').textContent   = fmt(rotis * 5);
+    document.getElementById('roti-count').textContent  = rotis;
+
+    // Rice row
+    document.getElementById('rice-row').style.display = rice ? '' : 'none';
+
+    // Prices
+    document.getElementById('per-day-val').textContent = fmt(perDay);
+    document.getElementById('weekly-val').textContent  = fmt(weekly);
+    document.getElementById('final-val').textContent   = fmt(final);
+
+    // Discount row
+    const dRow = document.getElementById('discount-row');
+    const sBadge = document.getElementById('save-badge');
+    if (preorder) {
+      dRow.style.display  = '';
+      sBadge.classList.add('show');
+    } else {
+      dRow.style.display  = 'none';
+      sBadge.classList.remove('show');
+    }
+  }
+
+  document.getElementById('roti-minus').addEventListener('click', function() {
+    if (rotis > MIN_ROTIS) { rotis--; updateCalc(); }
+  });
+  document.getElementById('roti-plus').addEventListener('click', function() {
+    if (rotis < MAX_ROTIS) { rotis++; updateCalc(); }
+  });
+  document.getElementById('rice-check').addEventListener('change', updateCalc);
+  document.getElementById('preorder-check').addEventListener('change', updateCalc);
+
+  function toggleCheck(id) {
+    var el = document.getElementById(id);
+    el.checked = !el.checked;
+    updateCalc();
+  }
+
+  // Init
+  updateCalc();
+
+  /* ── Smooth reveal on scroll ── */
+  if ('IntersectionObserver' in window) {
+    const cards = document.querySelectorAll('.menu-card, .why-card, .testi-card, .step');
+    const io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(function(c) {
+      c.style.opacity = '0';
+      c.style.transform = 'translateY(22px)';
+      c.style.transition = 'opacity .45s ease, transform .45s ease';
+      io.observe(c);
+    });
+  }
+</script>
+
+</body>
+</html>
