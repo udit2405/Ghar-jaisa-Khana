@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;800&family=Hind:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ─── RESET & BASE ─── */
@@ -19,8 +19,9 @@
       font-family: 'Nunito', sans-serif;
       background: #FFFBF4;
       color: #3D2C1E;
-      padding-bottom: 80px; /* space for sticky bar */
+      padding-bottom: 80px;
     }
+    body.lang-hi { font-family: 'Hind', 'Nunito', sans-serif; }
 
     /* ─── COLOUR TOKENS ─── */
     :root {
@@ -35,6 +36,46 @@
       --white:    #FFFFFF;
       --shadow:   0 4px 20px rgba(61,44,30,.10);
       --radius:   18px;
+    }
+
+    /* ─── LANGUAGE SWITCHER BAR ─── */
+    .lang-bar {
+      background: var(--brown);
+      padding: 9px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .lang-bar-label {
+      font-size: .78rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.6);
+      letter-spacing: .04em;
+    }
+    .lang-btn {
+      padding: 6px 18px;
+      border-radius: 30px;
+      border: 2px solid transparent;
+      background: rgba(255,255,255,.1);
+      color: rgba(255,255,255,.75);
+      font-family: inherit;
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+      letter-spacing: .02em;
+    }
+    .lang-btn:hover { background: rgba(255,255,255,.18); color: #fff; }
+    .lang-btn.active {
+      background: var(--yellow);
+      color: var(--brown);
+      border-color: var(--yellow);
+      box-shadow: 0 2px 10px rgba(255,197,49,.4);
+    }
+    .lang-divider {
+      color: rgba(255,255,255,.25);
+      font-size: .9rem;
     }
 
     /* ─── UTILITIES ─── */
@@ -52,13 +93,14 @@
       line-height: 1.25; color: var(--brown);
       margin-bottom: 8px;
     }
+    body.lang-hi h2.section-title { font-family: 'Hind', sans-serif; font-weight: 700; }
     p.section-sub { font-size: .95rem; color: var(--brown-lt); line-height: 1.6; margin-bottom: 28px; }
 
     /* ─── BUTTONS ─── */
     .btn-wa {
       display: flex; align-items: center; justify-content: center; gap: 10px;
       background: var(--green); color: #fff;
-      font-family: 'Nunito', sans-serif; font-size: 1.05rem; font-weight: 800;
+      font-family: inherit; font-size: 1.05rem; font-weight: 800;
       padding: 15px 28px; border-radius: 50px;
       text-decoration: none; border: none; cursor: pointer;
       box-shadow: 0 6px 22px rgba(37,211,102,.35);
@@ -72,7 +114,7 @@
     .btn-primary {
       display: flex; align-items: center; justify-content: center; gap: 8px;
       background: var(--orange); color: #fff;
-      font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800;
+      font-family: inherit; font-size: 1rem; font-weight: 800;
       padding: 14px 28px; border-radius: 50px;
       text-decoration: none; border: none; cursor: pointer;
       box-shadow: 0 6px 20px rgba(255,107,43,.30);
@@ -102,6 +144,7 @@
       display: flex; align-items: center; gap: 6px;
       box-shadow: 0 4px 14px rgba(37,211,102,.3);
       transition: transform .15s;
+      font-family: inherit;
     }
     .nav-cta:hover { transform: scale(1.03); }
     .nav-cta svg { width: 16px; height: 16px; }
@@ -125,6 +168,7 @@
       color: var(--brown); line-height: 1.2;
       margin-bottom: 14px;
     }
+    body.lang-hi .hero h1 { font-family: 'Hind', sans-serif; font-size: 2rem; font-weight: 700; }
     .hero h1 span { color: var(--orange); }
     .hero p {
       font-size: 1rem; color: var(--brown-lt);
@@ -157,10 +201,9 @@
       transition: transform .2s, box-shadow .2s;
     }
     .menu-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(61,44,30,.14); }
-    .menu-card:nth-child(1) { grid-column: 1 / -1; } /* first card full width */
+    .menu-card:nth-child(1) { grid-column: 1 / -1; }
     .menu-card-img {
       width: 100%; aspect-ratio: 4/3; object-fit: cover;
-      background: linear-gradient(135deg, #FFE5C8 0%, #FFDBA8 100%);
       display: block;
     }
     .menu-card-img-wrap {
@@ -175,7 +218,7 @@
       font-size: 3rem;
     }
     .menu-card:nth-child(1) .menu-card-img-wrap::after { font-size: 3.5rem; }
-    .menu-card-img[src] { position: relative; z-index: 1; }
+    .menu-card-img { position: relative; z-index: 1; }
     .menu-card-body { padding: 12px 14px 14px; }
     .menu-day { font-size: .72rem; font-weight: 800; color: var(--orange); text-transform: uppercase; letter-spacing: .05em; }
     .menu-name { font-size: .98rem; font-weight: 800; color: var(--brown); margin-top: 2px; }
@@ -219,7 +262,6 @@
     }
     .check-row label { font-size: .95rem; font-weight: 700; color: var(--brown); cursor: pointer; }
     .check-row .check-price { margin-left: auto; font-size: .85rem; font-weight: 800; color: var(--brown-lt); }
-
     .preorder-row {
       background: linear-gradient(135deg, #FFF5D9, #FFE6A3);
       border: 2px solid var(--yellow); border-radius: 14px;
@@ -233,7 +275,6 @@
     .preorder-label strong { display: block; font-size: .95rem; font-weight: 800; color: var(--brown); }
     .preorder-label span  { font-size: .8rem; font-weight: 600; color: var(--brown-lt); }
     .preorder-discount { font-size: 1rem; font-weight: 900; color: var(--orange); flex-shrink: 0; }
-
     .price-breakdown {
       background: var(--sand); border-radius: 14px;
       padding: 16px 18px; margin-bottom: 20px;
@@ -313,11 +354,9 @@
       font-size: 2rem; font-weight: 800; color: #fff;
       margin-bottom: 12px; line-height: 1.25;
     }
+    body.lang-hi .final-cta h2 { font-family: 'Hind', sans-serif; font-size: 1.8rem; }
     .final-cta p { font-size: .95rem; color: rgba(255,255,255,.85); margin-bottom: 28px; line-height: 1.6; }
-    .final-cta .btn-wa {
-      background: #fff; color: var(--green);
-      box-shadow: 0 8px 24px rgba(0,0,0,.15);
-    }
+    .final-cta .btn-wa { background: #fff; color: var(--green); box-shadow: 0 8px 24px rgba(0,0,0,.15); }
     .final-cta .btn-wa:hover { background: #f0fff4; }
 
     /* ─── FOOTER ─── */
@@ -339,7 +378,7 @@
     }
     .sticky-bar .btn-wa { border-radius: 50px; font-size: 1rem; padding: 14px 20px; }
 
-    /* ─── PULSE ANIMATION for CTA ─── */
+    /* ─── PULSE ─── */
     @keyframes pulse-green {
       0%,100% { box-shadow: 0 6px 22px rgba(37,211,102,.35); }
       50%      { box-shadow: 0 8px 30px rgba(37,211,102,.6); }
@@ -347,25 +386,34 @@
     .btn-wa { animation: pulse-green 2.5s ease-in-out infinite; }
     .btn-wa:hover { animation: none; }
 
-    /* ─── DESKTOP ADJUSTMENTS ─── */
+    /* ─── DESKTOP ─── */
     @media (min-width: 600px) {
       .menu-grid { grid-template-columns: 1fr 1fr 1fr; }
       .menu-card:nth-child(1) { grid-column: auto; }
       h2.section-title { font-size: 2rem; }
       .hero h1 { font-size: 2.8rem; }
+      body.lang-hi .hero h1 { font-size: 2.3rem; }
     }
   </style>
 </head>
-<body>
+<body id="page-body">
+
+<!-- ░░░ LANGUAGE SWITCHER ░░░ -->
+<div class="lang-bar">
+  <span class="lang-bar-label" id="lb-label">🌐 Language / भाषा</span>
+  <span class="lang-divider">|</span>
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">English</button>
+  <button class="lang-btn" id="btn-hi" onclick="setLang('hi')">हिंदी</button>
+</div>
 
 <!-- ░░░ NAV ░░░ -->
 <nav>
   <a href="#" class="nav-logo">
     <span>🍱</span> Mom Lunch
   </a>
-  <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="nav-cta" target="_blank" rel="noopener">
+  <a href="https://wa.me/919588859960?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="nav-cta" target="_blank" rel="noopener" id="nav-cta-btn">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.519 5.829L.057 23.09a.75.75 0 00.921.921l5.261-1.462A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.994-1.368l-.358-.212-3.122.868.835-3.049-.232-.376A9.775 9.775 0 012.182 12c0-5.419 4.399-9.818 9.818-9.818 5.419 0 9.818 4.399 9.818 9.818 0 5.42-4.399 9.818-9.818 9.818z"/></svg>
-    Order Now
+    <span data-key="nav-order">Order Now</span>
   </a>
 </nav>
 
@@ -373,17 +421,17 @@
 <section class="hero">
   <div class="container">
     <span class="hero-emoji">🍱</span>
-    <h1>Ghar Jaisa Dinner,<br /><span>Roz.</span></h1>
-    <p>Fresh homemade dinner tiffin delivered to your door every evening. Nutritious, delicious, just like mom makes it. 💛</p>
+    <h1 data-key="hero-h1">Ghar Jaisa Dinner,<br /><span data-key="hero-h1-span">Roz.</span></h1>
+    <p data-key="hero-p">Fresh homemade dinner tiffin delivered to your door every evening. Nutritious, delicious, just like mom makes it. 💛</p>
     <div class="hero-badges">
-      <span class="badge">🌿 100% Homemade</span>
-      <span class="badge">🚚 Daily Delivery</span>
-      <span class="badge">💰 Starts ₹250</span>
-      <span class="badge">❤️ No Preservatives</span>
+      <span class="badge" data-key="badge1">🌿 100% Homemade</span>
+      <span class="badge" data-key="badge2">🚚 Daily Delivery</span>
+      <span class="badge" data-key="badge3">💰 Starts ₹250</span>
+      <span class="badge" data-key="badge4">❤️ No Preservatives</span>
     </div>
-    <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener">
+    <a href="https://wa.me/919588859960?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.519 5.829L.057 23.09a.75.75 0 00.921.921l5.261-1.462A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.994-1.368l-.358-.212-3.122.868.835-3.049-.232-.376A9.775 9.775 0 012.182 12c0-5.419 4.399-9.818 9.818-9.818 5.419 0 9.818 4.399 9.818 9.818 0 5.42-4.399 9.818-9.818 9.818z"/></svg>
-      Order on WhatsApp – It's Easy!
+      <span data-key="hero-btn">Order on WhatsApp – It's Easy!</span>
     </a>
   </div>
 </section>
@@ -391,102 +439,95 @@
 <!-- ░░░ WEEKLY MENU ░░░ -->
 <section class="section" id="menu">
   <div class="container">
-    <span class="tag">📅 This Week's Menu</span>
-    <h2 class="section-title">7-Day Dinner Rotation</h2>
-    <p class="section-sub">Every day a fresh, home-cooked delight. Rotis made fresh with love. 💕</p>
+    <span class="tag" data-key="menu-tag">📅 This Week's Menu</span>
+    <h2 class="section-title" data-key="menu-title">7-Day Dinner Rotation</h2>
+    <p class="section-sub" data-key="menu-sub">Every day a fresh, home-cooked delight. Rotis made fresh with love. 💕</p>
 
     <div class="menu-grid">
 
       <div class="menu-card">
         <div class="menu-card-img-wrap" data-emoji="🍛">
-          <img src="images/day1.jpg" alt="Homemade Chole Roti" class="menu-card-img"
-               onerror="this.style.display='none'" />
+          <img src="images/day1.jpg" alt="Homemade Chole Roti" class="menu-card-img" onerror="this.style.display='none'" />
         </div>
         <div class="menu-card-body">
-          <div class="menu-day">Monday</div>
-          <div class="menu-name">Chole + Roti</div>
-          <span class="menu-price-tag">from ₹250</span>
+          <div class="menu-day" data-key="day1">Monday</div>
+          <div class="menu-name" data-key="meal1">Chole + Roti</div>
+          <span class="menu-price-tag" data-key="from250">from ₹250</span>
         </div>
       </div>
 
       <div class="menu-card">
         <div class="menu-card-img-wrap" data-emoji="🫘">
-          <img src="images/day2.jpg" alt="Homemade Rajma Roti" class="menu-card-img"
-               onerror="this.style.display='none'" />
+          <img src="images/day2.jpg" alt="Homemade Rajma Roti" class="menu-card-img" onerror="this.style.display='none'" />
         </div>
         <div class="menu-card-body">
-          <div class="menu-day">Tuesday</div>
-          <div class="menu-name">Rajma + Roti</div>
-          <span class="menu-price-tag">from ₹250</span>
+          <div class="menu-day" data-key="day2">Tuesday</div>
+          <div class="menu-name" data-key="meal2">Rajma + Roti</div>
+          <span class="menu-price-tag" data-key="from250b">from ₹250</span>
         </div>
       </div>
 
       <div class="menu-card">
         <div class="menu-card-img-wrap" data-emoji="🥔">
-          <img src="images/day3.jpg" alt="Homemade Aloo Roti" class="menu-card-img"
-               onerror="this.style.display='none'" />
+          <img src="images/day3.jpg" alt="Homemade Aloo Roti" class="menu-card-img" onerror="this.style.display='none'" />
         </div>
         <div class="menu-card-body">
-          <div class="menu-day">Wednesday</div>
-          <div class="menu-name">Aloo + Roti</div>
-          <span class="menu-price-tag">from ₹250</span>
+          <div class="menu-day" data-key="day3">Wednesday</div>
+          <div class="menu-name" data-key="meal3">Aloo + Roti</div>
+          <span class="menu-price-tag" data-key="from250c">from ₹250</span>
         </div>
       </div>
 
       <div class="menu-card">
         <div class="menu-card-img-wrap" data-emoji="🍲">
-          <img src="images/day4.jpg" alt="Homemade Daal Roti" class="menu-card-img"
-               onerror="this.style.display='none'" />
+          <img src="images/day4.jpg" alt="Homemade Daal Roti" class="menu-card-img" onerror="this.style.display='none'" />
         </div>
         <div class="menu-card-body">
-          <div class="menu-day">Thursday</div>
-          <div class="menu-name">Daal + Roti</div>
-          <span class="menu-price-tag">from ₹250</span>
+          <div class="menu-day" data-key="day4">Thursday</div>
+          <div class="menu-name" data-key="meal4">Daal + Roti</div>
+          <span class="menu-price-tag" data-key="from250d">from ₹250</span>
         </div>
       </div>
 
       <div class="menu-card">
         <div class="menu-card-img-wrap" data-emoji="🥦">
-          <img src="images/day5.jpg" alt="Homemade Bhindi Roti" class="menu-card-img"
-               onerror="this.style.display='none'" />
+          <img src="images/day5.jpg" alt="Homemade Bhindi Roti" class="menu-card-img" onerror="this.style.display='none'" />
         </div>
         <div class="menu-card-body">
-          <div class="menu-day">Friday</div>
-          <div class="menu-name">Bhindi + Roti</div>
-          <span class="menu-price-tag">from ₹250</span>
+          <div class="menu-day" data-key="day5">Friday</div>
+          <div class="menu-name" data-key="meal5">Bhindi + Roti</div>
+          <span class="menu-price-tag" data-key="from250e">from ₹250</span>
         </div>
       </div>
 
       <div class="menu-card">
         <div class="menu-card-img-wrap" data-emoji="🥛">
-          <img src="images/day6.jpg" alt="Homemade Kadhi Roti" class="menu-card-img"
-               onerror="this.style.display='none'" />
+          <img src="images/day6.jpg" alt="Homemade Kadhi Roti" class="menu-card-img" onerror="this.style.display='none'" />
         </div>
         <div class="menu-card-body">
-          <div class="menu-day">Saturday</div>
-          <div class="menu-name">Kadhi + Roti</div>
-          <span class="menu-price-tag">from ₹250</span>
+          <div class="menu-day" data-key="day6">Saturday</div>
+          <div class="menu-name" data-key="meal6">Kadhi + Roti</div>
+          <span class="menu-price-tag" data-key="from250f">from ₹250</span>
         </div>
       </div>
 
       <div class="menu-card">
         <div class="menu-card-img-wrap" data-emoji="🥬">
-          <img src="images/day7.jpg" alt="Homemade Gobi Roti" class="menu-card-img"
-               onerror="this.style.display='none'" />
+          <img src="images/day7.jpg" alt="Homemade Gobi Roti" class="menu-card-img" onerror="this.style.display='none'" />
         </div>
         <div class="menu-card-body">
-          <div class="menu-day">Sunday</div>
-          <div class="menu-name">Gobi + Roti</div>
-          <span class="menu-price-tag">from ₹250</span>
+          <div class="menu-day" data-key="day7">Sunday</div>
+          <div class="menu-name" data-key="meal7">Gobi + Roti</div>
+          <span class="menu-price-tag" data-key="from250g">from ₹250</span>
         </div>
       </div>
 
     </div>
 
     <br />
-    <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener" style="margin-top:8px;">
+    <a href="https://wa.me/919588859960?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener" style="margin-top:8px;">
       <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.519 5.829L.057 23.09a.75.75 0 00.921.921l5.261-1.462A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.994-1.368l-.358-.212-3.122.868.835-3.049-.232-.376A9.775 9.775 0 012.182 12c0-5.419 4.399-9.818 9.818-9.818 5.419 0 9.818 4.399 9.818 9.818 0 5.42-4.399 9.818-9.818 9.818z"/></svg>
-      Order Today's Tiffin
+      <span data-key="menu-btn">Order Today's Tiffin</span>
     </a>
   </div>
 </section>
@@ -494,77 +535,72 @@
 <!-- ░░░ PRICING CALCULATOR ░░░ -->
 <section class="section section-alt" id="pricing">
   <div class="container">
-    <span class="tag">💰 Pricing</span>
-    <h2 class="section-title">Calculate Your Tiffin Cost</h2>
-    <p class="section-sub">Customise your meal and see the price instantly. No hidden charges!</p>
+    <span class="tag" data-key="price-tag">💰 Pricing</span>
+    <h2 class="section-title" data-key="price-title">Calculate Your Tiffin Cost</h2>
+    <p class="section-sub" data-key="price-sub">Customise your meal and see the price instantly. No hidden charges!</p>
 
     <div class="calc-card">
-
-      <!-- Roti count -->
-      <label class="calc-label">🫓 How many rotis per day?</label>
+      <label class="calc-label" data-key="roti-label-text">🫓 How many rotis per day?</label>
       <div class="roti-stepper">
         <button class="stepper-btn" id="roti-minus" aria-label="Decrease rotis">−</button>
         <span id="roti-count">4</span>
         <button class="stepper-btn" id="roti-plus" aria-label="Increase rotis">+</button>
-        <span style="font-size:.85rem;color:var(--brown-lt);font-weight:600;">× ₹5 each</span>
+        <span style="font-size:.85rem;color:var(--brown-lt);font-weight:600;" data-key="roti-each">× ₹5 each</span>
       </div>
 
-      <!-- Rice -->
       <div class="check-row" onclick="toggleCheck('rice-check')">
         <input type="checkbox" id="rice-check" />
-        <label for="rice-check">🍚 Add Rice Bowl</label>
+        <label for="rice-check" data-key="rice-label">🍚 Add Rice Bowl</label>
         <span class="check-price">+₹30</span>
       </div>
 
-      <!-- Pre-order -->
       <div class="preorder-row" onclick="toggleCheck('preorder-check')">
         <input type="checkbox" id="preorder-check" />
         <div class="preorder-label">
-          <strong>🗓️ Pre-order Full Week</strong>
-          <span>Book all 7 days together & save big</span>
+          <strong data-key="preorder-strong">🗓️ Pre-order Full Week</strong>
+          <span data-key="preorder-span">Book all 7 days together &amp; save big</span>
         </div>
         <span class="preorder-discount">−₹99</span>
       </div>
 
-      <!-- Breakdown -->
       <div class="price-breakdown">
         <div class="pb-row">
-          <span class="pb-label">Base meal</span>
+          <span class="pb-label" data-key="pb-base">Base meal</span>
           <span class="pb-val">₹250</span>
         </div>
         <div class="pb-row" id="roti-row">
-          <span class="pb-label" id="roti-label">4 rotis × ₹5</span>
+          <span class="pb-label" id="roti-label-calc">4 rotis × ₹5</span>
           <span class="pb-val" id="roti-val">₹20</span>
         </div>
         <div class="pb-row" id="rice-row" style="display:none;">
-          <span class="pb-label">Rice bowl</span>
+          <span class="pb-label" data-key="pb-rice">Rice bowl</span>
           <span class="pb-val">₹30</span>
         </div>
         <div class="pb-divider"></div>
         <div class="pb-row">
-          <span class="pb-label">Per day price</span>
+          <span class="pb-label" data-key="pb-perday">Per day price</span>
           <span class="pb-val" id="per-day-val">₹270</span>
         </div>
         <div class="pb-row">
-          <span class="pb-label">Weekly (×7 days)</span>
+          <span class="pb-label" data-key="pb-weekly">Weekly (×7 days)</span>
           <span class="pb-val" id="weekly-val">₹1,890</span>
         </div>
         <div class="pb-row pb-discount" id="discount-row" style="display:none;">
-          <span class="pb-label">🎉 Pre-order discount</span>
-          <span class="pb-val" id="discount-val" style="color:#2E9E4F;">−₹99</span>
+          <span class="pb-label" data-key="pb-discount">🎉 Pre-order discount</span>
+          <span class="pb-val" style="color:#2E9E4F;">−₹99</span>
         </div>
         <div class="pb-divider"></div>
         <div class="pb-row pb-total">
-          <span class="pb-label">Total weekly</span>
+          <span class="pb-label" data-key="pb-total">Total weekly</span>
           <span class="pb-val" id="final-val">₹1,890</span>
         </div>
       </div>
 
-      <div class="save-badge" id="save-badge">🎉 Pre-order & save ₹99 — Smart choice!</div>
+      <div class="save-badge" id="save-badge" data-key="save-badge-text">🎉 Pre-order &amp; save ₹99 — Smart choice!</div>
 
-      <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener">
+      <a href="https://wa.me/919588859960?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.519 5.829L.057 23.09a.75.75 0 00.921.921l5.261-1.462A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.994-1.368l-.358-.212-3.122.868.835-3.049-.232-.376A9.775 9.775 0 012.182 12c0-5.419 4.399-9.818 9.818-9.818 5.419 0 9.818 4.399 9.818 9.818 0 5.42-4.399 9.818-9.818 9.818z"/></svg>
-        Order on WhatsApp Now
+        <span data-key="price-btn">Order on WhatsApp Now</span>
       </a>
     </div>
   </div>
@@ -573,40 +609,40 @@
 <!-- ░░░ WHY CHOOSE US ░░░ -->
 <section class="section" id="why">
   <div class="container">
-    <span class="tag">⭐ Why Mom Lunch?</span>
-    <h2 class="section-title">Food Made with Heart</h2>
-    <p class="section-sub">Not a restaurant. Not a cloud kitchen. Just a mom who loves to cook. 🤍</p>
+    <span class="tag" data-key="why-tag">⭐ Why Mom Lunch?</span>
+    <h2 class="section-title" data-key="why-title">Food Made with Heart</h2>
+    <p class="section-sub" data-key="why-sub">Not a restaurant. Not a cloud kitchen. Just a mom who loves to cook. 🤍</p>
 
     <div class="why-grid">
       <div class="why-card">
         <span class="why-icon">🌿</span>
-        <div class="why-title">Fresh Ingredients</div>
-        <div class="why-desc">Sourced fresh daily. No frozen food, ever.</div>
+        <div class="why-title" data-key="w1t">Fresh Ingredients</div>
+        <div class="why-desc" data-key="w1d">Sourced fresh daily. No frozen food, ever.</div>
       </div>
       <div class="why-card">
         <span class="why-icon">🚫</span>
-        <div class="why-title">No Preservatives</div>
-        <div class="why-desc">100% natural. No chemicals, no shortcuts.</div>
+        <div class="why-title" data-key="w2t">No Preservatives</div>
+        <div class="why-desc" data-key="w2d">100% natural. No chemicals, no shortcuts.</div>
       </div>
       <div class="why-card">
         <span class="why-icon">⏱️</span>
-        <div class="why-title">On-Time Delivery</div>
-        <div class="why-desc">Hot dinner delivered before 8 PM daily.</div>
+        <div class="why-title" data-key="w3t">On-Time Delivery</div>
+        <div class="why-desc" data-key="w3d">Hot dinner delivered before 8 PM daily.</div>
       </div>
       <div class="why-card">
         <span class="why-icon">💰</span>
-        <div class="why-title">Affordable</div>
-        <div class="why-desc">Better than a restaurant, cheaper too!</div>
+        <div class="why-title" data-key="w4t">Affordable</div>
+        <div class="why-desc" data-key="w4d">Better than a restaurant, cheaper too!</div>
       </div>
       <div class="why-card">
         <span class="why-icon">🧂</span>
-        <div class="why-title">Customisable</div>
-        <div class="why-desc">Less spice? More rotis? Just let us know.</div>
+        <div class="why-title" data-key="w5t">Customisable</div>
+        <div class="why-desc" data-key="w5d">Less spice? More rotis? Just let us know.</div>
       </div>
       <div class="why-card">
         <span class="why-icon">❤️</span>
-        <div class="why-title">Made with Love</div>
-        <div class="why-desc">Every tiffin packed like feeding your own family.</div>
+        <div class="why-title" data-key="w6t">Made with Love</div>
+        <div class="why-desc" data-key="w6d">Every tiffin packed like feeding your own family.</div>
       </div>
     </div>
   </div>
@@ -615,37 +651,37 @@
 <!-- ░░░ HOW IT WORKS ░░░ -->
 <section class="section section-alt" id="how">
   <div class="container">
-    <span class="tag">📖 How It Works</span>
-    <h2 class="section-title">3 Simple Steps</h2>
-    <p class="section-sub">Starting your tiffin subscription is as easy as texting a friend!</p>
+    <span class="tag" data-key="how-tag">📖 How It Works</span>
+    <h2 class="section-title" data-key="how-title">3 Simple Steps</h2>
+    <p class="section-sub" data-key="how-sub">Starting your tiffin subscription is as easy as texting a friend!</p>
 
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <h4>📱 Message Us on WhatsApp</h4>
-          <p>Click any "Order on WhatsApp" button. Tell us your address, meal preferences, and start date.</p>
+          <h4 data-key="step1t">📱 Message Us on WhatsApp</h4>
+          <p data-key="step1p">Click any "Order on WhatsApp" button. Tell us your address, meal preferences, and start date.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <h4>✅ Confirm Your Order</h4>
-          <p>We'll confirm your daily tiffin, number of rotis, and any add-ons. Simple, no app needed.</p>
+          <h4 data-key="step2t">✅ Confirm Your Order</h4>
+          <p data-key="step2p">We'll confirm your daily tiffin, number of rotis, and any add-ons. Simple, no app needed.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <h4>🍱 Get Hot Tiffin Delivered!</h4>
-          <p>Fresh, hot dinner arrives at your door every evening. Eat, enjoy, repeat! 😋</p>
+          <h4 data-key="step3t">🍱 Get Hot Tiffin Delivered!</h4>
+          <p data-key="step3p">Fresh, hot dinner arrives at your door every evening. Eat, enjoy, repeat! 😋</p>
         </div>
       </div>
     </div>
 
     <br />
-    <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-primary" target="_blank" rel="noopener">
-      🚀 Start My Tiffin Today
+    <a href="https://wa.me/919588859960?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-primary" target="_blank" rel="noopener">
+      <span data-key="how-btn">🚀 Start My Tiffin Today</span>
     </a>
   </div>
 </section>
@@ -653,14 +689,14 @@
 <!-- ░░░ TESTIMONIALS ░░░ -->
 <section class="section" id="testimonials">
   <div class="container">
-    <span class="tag">💬 Happy Customers</span>
-    <h2 class="section-title">What People Are Saying</h2>
-    <p class="section-sub">Real reviews from real tiffin lovers in our area. 🏡</p>
+    <span class="tag" data-key="testi-tag">💬 Happy Customers</span>
+    <h2 class="section-title" data-key="testi-title">What People Are Saying</h2>
+    <p class="section-sub" data-key="testi-sub">Real reviews from real tiffin lovers in our area. 🏡</p>
 
     <div class="testi-list">
       <div class="testi-card">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Ekdum ghar jaisa khana! The chole were just like my mother used to make. Super fresh and on time every day. Highly recommend to anyone living alone!"</p>
+        <p class="testi-text" data-key="t1">"Ekdum ghar jaisa khana! The chole were just like my mother used to make. Super fresh and on time every day. Highly recommend to anyone living alone!"</p>
         <div class="testi-author">
           <div class="testi-avatar">👨</div>
           <div>
@@ -669,10 +705,9 @@
           </div>
         </div>
       </div>
-
       <div class="testi-card">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Best tiffin service I've tried in this area. No maida, no oil dripping, just simple healthy food. My kids love the daal and roti. Will continue for sure!"</p>
+        <p class="testi-text" data-key="t2">"Best tiffin service I've tried in this area. No maida, no oil dripping, just simple healthy food. My kids love the daal and roti. Will continue for sure!"</p>
         <div class="testi-author">
           <div class="testi-avatar">👩</div>
           <div>
@@ -681,10 +716,9 @@
           </div>
         </div>
       </div>
-
       <div class="testi-card">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Ordered the full week pre-order and saved ₹99. The quality is consistent every day. Rajma on Tuesday was absolutely 🔥. WhatsApp ordering is so convenient!"</p>
+        <p class="testi-text" data-key="t3">"Ordered the full week pre-order and saved ₹99. The quality is consistent every day. Rajma on Tuesday was absolutely 🔥. WhatsApp ordering is so convenient!"</p>
         <div class="testi-author">
           <div class="testi-avatar">👨‍💼</div>
           <div>
@@ -700,11 +734,11 @@
 <!-- ░░░ FINAL CTA ░░░ -->
 <section class="final-cta">
   <div class="container">
-    <h2>Hungry? Let's Fix That. 🍱</h2>
-    <p>Join hundreds of happy customers enjoying fresh homemade dinner every evening. Order in 30 seconds on WhatsApp!</p>
-    <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener">
+    <h2 data-key="cta-h2">Hungry? Let's Fix That. 🍱</h2>
+    <p data-key="cta-p">Join hundreds of happy customers enjoying fresh homemade dinner every evening. Order in 30 seconds on WhatsApp!</p>
+    <a href="https://wa.me/919588859960?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.519 5.829L.057 23.09a.75.75 0 00.921.921l5.261-1.462A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.994-1.368l-.358-.212-3.122.868.835-3.049-.232-.376A9.775 9.775 0 012.182 12c0-5.419 4.399-9.818 9.818-9.818 5.419 0 9.818 4.399 9.818 9.818 0 5.42-4.399 9.818-9.818 9.818z"/></svg>
-      Order on WhatsApp — Free & Fast!
+      <span data-key="cta-btn">Order on WhatsApp — Free &amp; Fast!</span>
     </a>
   </div>
 </section>
@@ -712,64 +746,244 @@
 <!-- ░░░ FOOTER ░░░ -->
 <footer>
   <strong>🍱 Mom Lunch</strong><br />
-  Homemade dinner tiffin, made with love every day.<br />
-  <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" target="_blank" rel="noopener">📞 +91 95888 59966</a>
+  <span data-key="footer-tag">Homemade dinner tiffin, made with love every day.</span><br />
+  <a href="https://wa.me/919588859960?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" target="_blank" rel="noopener">📞 +91 95888 59966</a>
   &nbsp;|&nbsp;
-  <a href="#menu">Menu</a>
+  <a href="#menu" data-key="footer-menu">Menu</a>
   &nbsp;|&nbsp;
-  <a href="#pricing">Pricing</a>
+  <a href="#pricing" data-key="footer-pricing">Pricing</a>
   <br /><br />
-  <span style="font-size:.75rem;">Made with ❤️ for home food lovers.</span>
+  <span style="font-size:.75rem;" data-key="footer-love">Made with ❤️ for home food lovers.</span>
 </footer>
 
 <!-- ░░░ STICKY BAR ░░░ -->
 <div class="sticky-bar">
-  <a href="https://wa.me/919588859966?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener">
+  <a href="https://wa.me/919588859960?text=Hi%20I%20want%20to%20order%20dinner%20tiffin" class="btn-wa" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.519 5.829L.057 23.09a.75.75 0 00.921.921l5.261-1.462A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.994-1.368l-.358-.212-3.122.868.835-3.049-.232-.376A9.775 9.775 0 012.182 12c0-5.419 4.399-9.818 9.818-9.818 5.419 0 9.818 4.399 9.818 9.818 0 5.42-4.399 9.818-9.818 9.818z"/></svg>
-    🍱 Order Dinner on WhatsApp
+    <span data-key="sticky-btn">🍱 Order Dinner on WhatsApp</span>
   </a>
 </div>
 
 <!-- ░░░ JAVASCRIPT ░░░ -->
 <script>
-  /* ── Calculator Logic ── */
-  let rotis = 4;
-  const MIN_ROTIS = 1, MAX_ROTIS = 15;
+  /* ════════════════════════════════════════════
+     TRANSLATIONS
+  ════════════════════════════════════════════ */
+  var T = {
+    en: {
+      'nav-order':       'Order Now',
+      'hero-h1':         'Ghar Jaisa Dinner,<br /><span data-key="hero-h1-span">Roz.</span>',
+      'hero-h1-span':    'Roz.',
+      'hero-p':          'Fresh homemade dinner tiffin delivered to your door every evening. Nutritious, delicious, just like mom makes it. 💛',
+      'badge1':          '🌿 100% Homemade',
+      'badge2':          '🚚 Daily Delivery',
+      'badge3':          '💰 Starts ₹250',
+      'badge4':          '❤️ No Preservatives',
+      'hero-btn':        'Order on WhatsApp – It\'s Easy!',
+      'menu-tag':        '📅 This Week\'s Menu',
+      'menu-title':      '7-Day Dinner Rotation',
+      'menu-sub':        'Every day a fresh, home-cooked delight. Rotis made fresh with love. 💕',
+      'day1':'Monday',   'day2':'Tuesday',  'day3':'Wednesday',
+      'day4':'Thursday', 'day5':'Friday',   'day6':'Saturday', 'day7':'Sunday',
+      'meal1':'Chole + Roti', 'meal2':'Rajma + Roti', 'meal3':'Aloo + Roti',
+      'meal4':'Daal + Roti',  'meal5':'Bhindi + Roti','meal6':'Kadhi + Roti','meal7':'Gobi + Roti',
+      'from250':'from ₹250','from250b':'from ₹250','from250c':'from ₹250',
+      'from250d':'from ₹250','from250e':'from ₹250','from250f':'from ₹250','from250g':'from ₹250',
+      'menu-btn':        'Order Today\'s Tiffin',
+      'price-tag':       '💰 Pricing',
+      'price-title':     'Calculate Your Tiffin Cost',
+      'price-sub':       'Customise your meal and see the price instantly. No hidden charges!',
+      'roti-label-text': '🫓 How many rotis per day?',
+      'roti-each':       '× ₹5 each',
+      'rice-label':      '🍚 Add Rice Bowl',
+      'preorder-strong': '🗓️ Pre-order Full Week',
+      'preorder-span':   'Book all 7 days together & save big',
+      'pb-base':         'Base meal',
+      'pb-rice':         'Rice bowl',
+      'pb-perday':       'Per day price',
+      'pb-weekly':       'Weekly (×7 days)',
+      'pb-discount':     '🎉 Pre-order discount',
+      'pb-total':        'Total weekly',
+      'save-badge-text': '🎉 Pre-order & save ₹99 — Smart choice!',
+      'price-btn':       'Order on WhatsApp Now',
+      'why-tag':         '⭐ Why Mom Lunch?',
+      'why-title':       'Food Made with Heart',
+      'why-sub':         'Not a restaurant. Not a cloud kitchen. Just a mom who loves to cook. 🤍',
+      'w1t':'Fresh Ingredients',  'w1d':'Sourced fresh daily. No frozen food, ever.',
+      'w2t':'No Preservatives',   'w2d':'100% natural. No chemicals, no shortcuts.',
+      'w3t':'On-Time Delivery',   'w3d':'Hot dinner delivered before 8 PM daily.',
+      'w4t':'Affordable',         'w4d':'Better than a restaurant, cheaper too!',
+      'w5t':'Customisable',       'w5d':'Less spice? More rotis? Just let us know.',
+      'w6t':'Made with Love',     'w6d':'Every tiffin packed like feeding your own family.',
+      'how-tag':   '📖 How It Works',
+      'how-title': '3 Simple Steps',
+      'how-sub':   'Starting your tiffin subscription is as easy as texting a friend!',
+      'step1t': '📱 Message Us on WhatsApp',
+      'step1p': 'Click any "Order on WhatsApp" button. Tell us your address, meal preferences, and start date.',
+      'step2t': '✅ Confirm Your Order',
+      'step2p': 'We\'ll confirm your daily tiffin, number of rotis, and any add-ons. Simple, no app needed.',
+      'step3t': '🍱 Get Hot Tiffin Delivered!',
+      'step3p': 'Fresh, hot dinner arrives at your door every evening. Eat, enjoy, repeat! 😋',
+      'how-btn':   '🚀 Start My Tiffin Today',
+      'testi-tag':   '💬 Happy Customers',
+      'testi-title': 'What People Are Saying',
+      'testi-sub':   'Real reviews from real tiffin lovers in our area. 🏡',
+      't1': '"Ekdum ghar jaisa khana! The chole were just like my mother used to make. Super fresh and on time every day. Highly recommend to anyone living alone!"',
+      't2': '"Best tiffin service I\'ve tried in this area. No maida, no oil dripping, just simple healthy food. My kids love the daal and roti. Will continue for sure!"',
+      't3': '"Ordered the full week pre-order and saved ₹99. The quality is consistent every day. Rajma on Tuesday was absolutely 🔥. WhatsApp ordering is so convenient!"',
+      'cta-h2':  'Hungry? Let\'s Fix That. 🍱',
+      'cta-p':   'Join hundreds of happy customers enjoying fresh homemade dinner every evening. Order in 30 seconds on WhatsApp!',
+      'cta-btn': 'Order on WhatsApp — Free & Fast!',
+      'footer-tag':     'Homemade dinner tiffin, made with love every day.',
+      'footer-menu':    'Menu',
+      'footer-pricing': 'Pricing',
+      'footer-love':    'Made with ❤️ for home food lovers.',
+      'sticky-btn':     '🍱 Order Dinner on WhatsApp',
+      'roti-unit':      'rotis'
+    },
 
-  function fmt(n) {
-    return '₹' + n.toLocaleString('en-IN');
+    hi: {
+      'nav-order':       'अभी ऑर्डर करें',
+      'hero-h1':         'घर जैसा डिनर,<br /><span data-key="hero-h1-span">रोज़।</span>',
+      'hero-h1-span':    'रोज़।',
+      'hero-p':          'हर शाम ताज़ा घर का बना डिनर टिफिन आपके दरवाज़े पर। पौष्टिक, स्वादिष्ट — बिल्कुल माँ के हाथ का खाना। 💛',
+      'badge1':          '🌿 100% घर का बना',
+      'badge2':          '🚚 रोज़ डिलीवरी',
+      'badge3':          '💰 ₹250 से शुरू',
+      'badge4':          '❤️ कोई प्रिज़र्वेटिव नहीं',
+      'hero-btn':        'WhatsApp पर ऑर्डर करें – बेहद आसान!',
+      'menu-tag':        '📅 इस हफ्ते का मेनू',
+      'menu-title':      '7 दिन का डिनर मेनू',
+      'menu-sub':        'हर दिन एक ताज़ा, घर जैसा डिनर। प्यार से बनी गरमागरम रोटियाँ। 💕',
+      'day1':'सोमवार',  'day2':'मंगलवार', 'day3':'बुधवार',
+      'day4':'गुरुवार', 'day5':'शुक्रवार','day6':'शनिवार', 'day7':'रविवार',
+      'meal1':'छोले + रोटी', 'meal2':'राजमा + रोटी', 'meal3':'आलू + रोटी',
+      'meal4':'दाल + रोटी',  'meal5':'भिंडी + रोटी', 'meal6':'कढ़ी + रोटी','meal7':'गोभी + रोटी',
+      'from250':'₹250 से शुरू','from250b':'₹250 से शुरू','from250c':'₹250 से शुरू',
+      'from250d':'₹250 से शुरू','from250e':'₹250 से शुरू','from250f':'₹250 से शुरू','from250g':'₹250 से शुरू',
+      'menu-btn':        'आज की टिफिन ऑर्डर करें',
+      'price-tag':       '💰 कीमत जानें',
+      'price-title':     'अपनी टिफिन की कीमत जानें',
+      'price-sub':       'अपना खाना कस्टमाइज़ करें और तुरंत कीमत देखें। कोई छुपा हुआ चार्ज नहीं!',
+      'roti-label-text': '🫓 रोज़ कितनी रोटियाँ चाहिए?',
+      'roti-each':       '× ₹5 प्रति रोटी',
+      'rice-label':      '🍚 चावल का कटोरा जोड़ें',
+      'preorder-strong': '🗓️ पूरे हफ्ते का प्री-ऑर्डर',
+      'preorder-span':   '7 दिन एक साथ बुक करें और बचाएं',
+      'pb-base':         'बेस मील',
+      'pb-rice':         'चावल का कटोरा',
+      'pb-perday':       'प्रति दिन कीमत',
+      'pb-weekly':       'साप्ताहिक (×7 दिन)',
+      'pb-discount':     '🎉 प्री-ऑर्डर छूट',
+      'pb-total':        'कुल साप्ताहिक',
+      'save-badge-text': '🎉 प्री-ऑर्डर करें और ₹99 बचाएं — शानदार चुनाव!',
+      'price-btn':       'अभी WhatsApp पर ऑर्डर करें',
+      'why-tag':         '⭐ Mom Lunch क्यों?',
+      'why-title':       'दिल से बना खाना',
+      'why-sub':         'न रेस्तरां, न क्लाउड किचन। बस एक माँ जो खाना बनाना पसंद करती है। 🤍',
+      'w1t':'ताज़ी सामग्री',       'w1d':'हर दिन ताज़ा सामग्री। कोई फ्रोज़न खाना नहीं।',
+      'w2t':'कोई प्रिज़र्वेटिव नहीं','w2d':'100% प्राकृतिक। कोई केमिकल नहीं, कोई शॉर्टकट नहीं।',
+      'w3t':'समय पर डिलीवरी',      'w3d':'रोज़ रात 8 बजे से पहले गरमागरम डिनर।',
+      'w4t':'किफ़ायती',             'w4d':'रेस्तरां से बेहतर, और सस्ता भी!',
+      'w5t':'अपने अनुसार बदलें',   'w5d':'कम मसाला? ज़्यादा रोटी? बस बताएं।',
+      'w6t':'प्यार से बना',         'w6d':'हर टिफिन अपने परिवार के लिए बनाने जैसी देखभाल।',
+      'how-tag':   '📖 कैसे काम करता है',
+      'how-title': '3 आसान कदम',
+      'how-sub':   'टिफिन शुरू करना उतना ही आसान है जितना किसी दोस्त को मैसेज करना!',
+      'step1t': '📱 WhatsApp पर मैसेज करें',
+      'step1p': 'कोई भी "WhatsApp पर ऑर्डर करें" बटन दबाएँ। अपना पता, खाने की पसंद और शुरू होने की तारीख बताएं।',
+      'step2t': '✅ ऑर्डर कन्फर्म करें',
+      'step2p': 'हम आपकी रोज़ की टिफिन, रोटियों की संख्या और ऐड-ऑन कन्फर्म करेंगे। सरल, कोई ऐप की ज़रूरत नहीं।',
+      'step3t': '🍱 गरमागरम टिफिन पाएं!',
+      'step3p': 'हर शाम ताज़ा, गरम डिनर आपके दरवाज़े पर। खाएं, आनंद लें, दोहराएं! 😋',
+      'how-btn':   '🚀 आज से टिफिन शुरू करें',
+      'testi-tag':   '💬 खुश ग्राहक',
+      'testi-title': 'लोग क्या कह रहे हैं',
+      'testi-sub':   'हमारे इलाके के असली टिफिन प्रेमियों की असली समीक्षाएँ। 🏡',
+      't1': '"एकदम घर जैसा खाना! छोले बिल्कुल वैसे ही थे जैसे मेरी माँ बनाती थीं। हर दिन ताज़ा और समय पर। अकेले रहने वालों के लिए ज़रूर ट्राई करें!"',
+      't2': '"इस इलाके में आज़माई सबसे अच्छी टिफिन सेवा। कोई मैदा नहीं, कोई तेल नहीं टपकता — बस सादा, स्वस्थ खाना। मेरे बच्चे दाल-रोटी बहुत पसंद करते हैं!"',
+      't3': '"पूरे हफ्ते का प्री-ऑर्डर किया और ₹99 बचाए। हर दिन एक जैसी गुणवत्ता। मंगलवार का राजमा तो 🔥 था। WhatsApp से ऑर्डर करना बहुत सुविधाजनक!"',
+      'cta-h2':  'भूख लगी है? हम हैं ना! 🍱',
+      'cta-p':   'सैकड़ों खुश ग्राहकों से जुड़ें जो हर शाम ताज़ा घर का बना डिनर खा रहे हैं। WhatsApp पर 30 सेकंड में ऑर्डर करें!',
+      'cta-btn': 'WhatsApp पर ऑर्डर करें — मुफ्त और तेज़!',
+      'footer-tag':     'घर का बना डिनर टिफिन, हर दिन प्यार से।',
+      'footer-menu':    'मेनू',
+      'footer-pricing': 'कीमत',
+      'footer-love':    'घर के खाने के प्रेमियों के लिए ❤️ से बनाया।',
+      'sticky-btn':     '🍱 WhatsApp पर डिनर ऑर्डर करें',
+      'roti-unit':      'रोटियाँ'
+    }
+  };
+
+  /* ════════════════════════════════════════════
+     LANGUAGE SWITCHER
+  ════════════════════════════════════════════ */
+  var currentLang = 'en';
+
+  function setLang(lang) {
+    currentLang = lang;
+
+    // Toggle active button
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-hi').classList.toggle('active', lang === 'hi');
+
+    // Body class for font
+    document.getElementById('page-body').classList.toggle('lang-hi', lang === 'hi');
+
+    // Update all data-key elements
+    var els = document.querySelectorAll('[data-key]');
+    els.forEach(function(el) {
+      var key = el.getAttribute('data-key');
+      if (T[lang] && T[lang][key] !== undefined) {
+        el.innerHTML = T[lang][key];
+      }
+    });
+
+    // Update hero h1 specially (it has a nested span)
+    var h1 = document.querySelector('.hero h1');
+    if (lang === 'hi') {
+      h1.innerHTML = 'घर जैसा डिनर,<br /><span style="color:var(--orange)">रोज़।</span>';
+    } else {
+      h1.innerHTML = 'Ghar Jaisa Dinner,<br /><span style="color:var(--orange)">Roz.</span>';
+    }
+
+    // Re-run calc to refresh roti label in correct language
+    updateCalc();
   }
 
+  /* ════════════════════════════════════════════
+     CALCULATOR
+  ════════════════════════════════════════════ */
+  var rotis = 4;
+  var MIN_ROTIS = 1, MAX_ROTIS = 15;
+
+  function fmt(n) { return '₹' + n.toLocaleString('en-IN'); }
+
   function updateCalc() {
-    const rice     = document.getElementById('rice-check').checked;
-    const preorder = document.getElementById('preorder-check').checked;
+    var rice     = document.getElementById('rice-check').checked;
+    var preorder = document.getElementById('preorder-check').checked;
 
-    const perDay  = 250 + (rotis * 5) + (rice ? 30 : 0);
-    const weekly  = perDay * 7;
-    const discount = preorder ? 99 : 0;
-    const final   = weekly - discount;
+    var perDay  = 250 + (rotis * 5) + (rice ? 30 : 0);
+    var weekly  = perDay * 7;
+    var discount = preorder ? 99 : 0;
+    var final   = weekly - discount;
 
-    // Roti row
-    document.getElementById('roti-label').textContent = rotis + ' roti' + (rotis !== 1 ? 's' : '') + ' × ₹5';
+    var unit = (T[currentLang] && T[currentLang]['roti-unit']) ? T[currentLang]['roti-unit'] : 'rotis';
+    document.getElementById('roti-label-calc').textContent = rotis + ' ' + unit + ' × ₹5';
     document.getElementById('roti-val').textContent   = fmt(rotis * 5);
     document.getElementById('roti-count').textContent  = rotis;
-
-    // Rice row
     document.getElementById('rice-row').style.display = rice ? '' : 'none';
-
-    // Prices
     document.getElementById('per-day-val').textContent = fmt(perDay);
     document.getElementById('weekly-val').textContent  = fmt(weekly);
     document.getElementById('final-val').textContent   = fmt(final);
 
-    // Discount row
-    const dRow = document.getElementById('discount-row');
-    const sBadge = document.getElementById('save-badge');
+    var dRow   = document.getElementById('discount-row');
+    var sBadge = document.getElementById('save-badge');
     if (preorder) {
-      dRow.style.display  = '';
+      dRow.style.display = '';
       sBadge.classList.add('show');
     } else {
-      dRow.style.display  = 'none';
+      dRow.style.display = 'none';
       sBadge.classList.remove('show');
     }
   }
@@ -789,13 +1003,12 @@
     updateCalc();
   }
 
-  // Init
-  updateCalc();
-
-  /* ── Smooth reveal on scroll ── */
+  /* ════════════════════════════════════════════
+     SCROLL REVEAL
+  ════════════════════════════════════════════ */
   if ('IntersectionObserver' in window) {
-    const cards = document.querySelectorAll('.menu-card, .why-card, .testi-card, .step');
-    const io = new IntersectionObserver(function(entries) {
+    var cards = document.querySelectorAll('.menu-card, .why-card, .testi-card, .step');
+    var io = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
         if (e.isIntersecting) {
           e.target.style.opacity = '1';
@@ -803,7 +1016,6 @@
         }
       });
     }, { threshold: 0.1 });
-
     cards.forEach(function(c) {
       c.style.opacity = '0';
       c.style.transform = 'translateY(22px)';
@@ -811,6 +1023,9 @@
       io.observe(c);
     });
   }
+
+  // Init
+  updateCalc();
 </script>
 
 </body>
